@@ -29,3 +29,9 @@ app.add_middleware(
 )
 
 app.include_router(agent_router, prefix="/agent")
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
