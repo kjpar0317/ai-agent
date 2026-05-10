@@ -42,12 +42,12 @@
   - `backend/app/agent/service.py`
   - 검증 실패 시 피드백을 반영해 재실행, 초과 시 실패 처리
 - 검증 기준 파일 완료:
-  - `rules.md`
+  - `.cursor/rules/agent-output-validation.mdc`
 
 ### 4) 모듈 스킬/문서화
 - 스킬 모듈화 완료:
-  - `.agent/skills/assistant-core/SKILL.md`
-  - `.agent/skills/tools-usage/SKILL.md`
+  - `.cursor/skills/assistant-core/SKILL.md`
+  - `.cursor/skills/tools-usage/SKILL.md`
 - 문서 갱신 완료:
   - `README.md` (루트)
   - `backend/README.md`

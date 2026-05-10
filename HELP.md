@@ -13,7 +13,7 @@
 > | ---------------------------------- | ----------------------------------------------------------------------------- |
 > | `.cursorrules` (단일 파일)         | `.cursor/rules/*.mdc` (스코프별 분리, MDC 포맷) — `.cursorrules`는 deprecated |
 > | Plan Mode = 외부 커스텀 워크플로우 | **Plan Mode = Cursor 내장 기능** (`Shift+Tab`)                                |
-> | `.agent/skills/` (비공식 관행)     | **Agent Skills = Cursor 공식 기능** (`SKILL.md` + Hooks)                      |
+> | `.agent/skills/` (레거시·비권장)   | **`.cursor/skills/`** — Cursor 공식 Agent Skills (`SKILL.md`; Hooks는 별도)   |
 > | 단일 에이전트                      | Background Agents + Parallel Multi-Agent 지원                                 |
 
 ---
@@ -89,12 +89,11 @@ Cursor 공식 블로그(2026.01)는 이렇게 말합니다:
 │   │   └── 📄 git.mdc                   # Git 워크플로우 규칙
 │   │
 │   ├── 📄 hooks.json                    # ⭐ 에이전트 자동화 훅 (Stop Hook 등)
-│   └── 📄 scratchpad.md                 # 에이전트 반복 루프용 임시 메모
-│
-├── 📂 .agent/                           # Agent Skills 정의
-│   └── 📂 skills/
+│   ├── 📄 scratchpad.md                 # 에이전트 반복 루프용 임시 메모
+│   │
+│   └── 📂 skills/                       # ⭐ Agent Skills (공식 위치)
 │       ├── 📂 stock-fetcher/
-│       │   ├── 📄 SKILL.md              # 스킬 실행 지침
+│       │   ├── 📄 SKILL.md
 │       │   └── 📂 scripts/
 │       │       └── 📄 fetch_prices.py
 │       └── 📂 _template/
@@ -489,7 +488,7 @@ cd backend && uv run pytest
 
 > **Status**: 🔴 NOT_STARTED  
 > **생성일**: YYYY-MM-DD  
-> **관련 Skills**: `.agent/skills/[스킬명]/`
+> **관련 Skills**: `.cursor/skills/[스킬명]/`
 
 ---
 
@@ -560,7 +559,7 @@ graph LR
 
 ---
 
-### 4-7. `SKILL.md` 템플릿 (`.agent/skills/_template/`)
+### 4-7. `SKILL.md` 템플릿 (`.cursor/skills/_template/`)
 
 ````markdown
 ---
@@ -583,7 +582,7 @@ trigger: "[이런 상황에서 이 스킬을 사용한다]"
 ## 실행 방법
 
 ```bash
-uv run .agent/skills/[스킬명]/scripts/main.py \
+uv run .cursor/skills/[스킬명]/scripts/main.py \
   --input [값] \
   --output [경로]
 ```
@@ -789,7 +788,7 @@ Loop 4: "React에서 /api/v1/analysis를 호출해 차트로
 
 ```bash
 # 1. 디렉터리 구조 생성
-mkdir -p .cursor/plans .cursor/rules .agent/skills/_template backend/app frontend/src
+mkdir -p .cursor/plans .cursor/rules .cursor/skills/_template backend/app frontend/src
 
 # 2. Python 환경 초기화
 cd backend
@@ -803,7 +802,7 @@ touch .cursor/rules/frontend.mdc
 touch .cursor/rules/git.mdc
 touch .cursor/plans/000-PROJECT-INDEX.md
 touch .cursor/plans/TEMPLATE-plan.md
-touch .agent/skills/_template/SKILL.md
+touch .cursor/skills/_template/SKILL.md
 echo '{"version": 1, "hooks": {}}' > .cursor/hooks.json
 echo "3.12" > backend/.python-version
 ```

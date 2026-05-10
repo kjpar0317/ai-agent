@@ -1,6 +1,7 @@
 ---
 name: tools-usage
-description: 뉴스 검색·파이썬 분석 도구 사용 지침
+description: 뉴스 검색·파이썬 분석 도구 사용 지침. 앱 에이전트 런타임에 주입된다.
+disable-model-invocation: true
 ---
 
 # tools-usage

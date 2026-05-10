@@ -55,10 +55,12 @@ class Settings(BaseSettings):
     rules_path: Path | None = Field(default=None, alias="AGENT_RULES_PATH")
 
     def resolved_skills_dir(self) -> Path:
-        return self.skills_dir or (self.repo_root / ".agent" / "skills")
+        return self.skills_dir or (self.repo_root / ".cursor" / "skills")
 
     def resolved_rules_path(self) -> Path:
-        return self.rules_path or (self.repo_root / "rules.md")
+        return self.rules_path or (
+            self.repo_root / ".cursor" / "rules" / "agent-output-validation.mdc"
+        )
 
 
 @lru_cache

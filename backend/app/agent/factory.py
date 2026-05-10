@@ -71,11 +71,11 @@ def build_main_agent(settings: Settings) -> Agent[None, str]:
 
 def build_validator_agent(settings: Settings) -> Agent[None, ValidationOutcome]:
     rules = load_rules_text(settings.resolved_rules_path())
-    rules_block = rules if rules else "(rules.md가 비어 있음 — 비어 있지 않은 답변과 섹션 구조만 확인)"
+    rules_block = rules if rules else "(검증 규칙 파일이 비어 있음 — 비어 있지 않은 답변과 섹션 구조만 확인)"
     system_prompt = (
-        "당신은 검증자입니다. 아래 rules.md 기준으로 에이전트 최종 답안이 규칙을 만족하는지 판단하고 "
+        "당신은 검증자입니다. 아래 검증 규칙 기준으로 에이전트 최종 답안이 규칙을 만족하는지 판단하고 "
         "ValidationOutcome 스키마에 맞게만 출력하세요.\n\n"
-        f"### rules.md\n{rules_block}"
+        f"### 검증 규칙\n{rules_block}"
     )
     return Agent(
         build_validator_model(settings),

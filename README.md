@@ -1,6 +1,6 @@
 # AI Agent (React 19 + FastAPI)
 
-자율 에이전트 **Small Loop** 골격: FastAPI에서 PydanticAI 에이전트가 도구를 호출하고, SSE로 이벤트를 흘리며, `rules.md` 기준 검증 에이전트가 최대 3회까지 재시도합니다. 프런트엔드는 Vite + React 19 + TanStack Query + Jotai로 상태를 폴링·스트림 반영합니다.
+자율 에이전트 **Small Loop** 골격: FastAPI에서 PydanticAI 에이전트가 도구를 호출하고, SSE로 이벤트를 흘리며, `.cursor/rules/agent-output-validation.mdc` 기준 검증 에이전트가 최대 3회까지 재시도합니다. 프런트엔드는 Vite + React 19 + TanStack Query + Jotai로 상태를 폴링·스트림 반영합니다.
 
 ## 현재 상태
 
@@ -28,11 +28,11 @@
 
 - `backend/app/agent/factory.py`에 Validator 에이전트 추가 완료
 - `backend/app/agent/service.py`에 검증 실패 시 최대 3회 재시도 로직 구현 완료
-- `rules.md` 기반 검증 체크리스트 반영 완료
+- `.cursor/rules/agent-output-validation.mdc` 기반 검증 체크리스트 반영 완료
 
 #### 4) 모듈 스킬/문서화
 
-- `.agent/skills/assistant-core/SKILL.md`, `.agent/skills/tools-usage/SKILL.md` 모듈화 완료
+- `.cursor/skills/assistant-core/SKILL.md`, `.cursor/skills/tools-usage/SKILL.md` 모듈화 완료
 - `backend/README.md`, `frontend/.env.example` 포함 실행/환경 문서 정리 완료
 
 ### 검증 결과
@@ -49,8 +49,8 @@
 
 - [backend/](backend/) — FastAPI, PydanticAI(Azure OpenAI 또는 TestModel), SQLAlchemy(async), `GET /agent/status/{run_id}`, `POST /agent/run`(SSE)
 - [frontend/](frontend/) — React 19, TanStack Query v5, Jotai, `src/hooks/useAgent.ts`, `AgentSteppers`
-- [.agent/skills/](.agent/skills/) — 런타임에 합쳐지는 모듈 스킬(SKILL.md)
-- [rules.md](rules.md) — 검증 에이전트 기준
+- [.cursor/skills/](.cursor/skills/) — 모듈 스킬(각 폴더의 `SKILL.md`만 로드). Cursor IDE 전용만 두려면 해당 `SKILL.md`에 `app-runtime: false`를 넣으면 FastAPI 에이전트 시스템 프롬프트에서는 제외된다.
+- [.cursor/rules/agent-output-validation.mdc](.cursor/rules/agent-output-validation.mdc) — 검증 에이전트 기준(Cursor 규칙과 동일 파일, MDC 프론트매터는 런타임에서 제거 후 사용)
 
 ## 빠른 시작
 
@@ -95,4 +95,4 @@ npm run dev
 
 ## BMAD-METHOD v6
 
-방법론 CLI·`_bmad/` 설치는 필수는 아닙니다. 계획·산출물은 `.cursor/plans/` 등 기존 워크플로에 두고, 앱 에이전트 지침만 `.agent/skills/`에 모듈화합니다.
+방법론 CLI·`_bmad/` 설치는 필수는 아닙니다. 계획·산출물은 `.cursor/plans/` 등에 두고, 앱 에이전트 지침·Cursor 스킬은 `.cursor/skills/`에 둡니다.

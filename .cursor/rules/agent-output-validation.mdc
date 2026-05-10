@@ -1,4 +1,10 @@
-# 에이전트 출력 검증 규칙 (rules.md)
+---
+description: FastAPI 런타임 검증 에이전트가 최종 답안을 판정할 때 사용하는 출력 규칙. 에이전트 파이프라인·설정 작업 시 참고.
+globs: backend/app/agent/**,backend/app/skills.py,backend/app/config.py
+alwaysApply: false
+---
+
+# 에이전트 출력 검증 규칙
 
 검증 에이전트는 최종 답안이 아래 기준을 만족하는지 `ValidationOutcome`으로 판정합니다.
 

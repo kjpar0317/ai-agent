@@ -1,6 +1,7 @@
 ---
 name: assistant-core
-description: 기본 대화·도구 사용 톤과 안전 가이드
+description: 기본 대화·도구 사용 톤과 안전 가이드. 앱 에이전트 런타임에 주입된다.
+disable-model-invocation: true
 ---
 
 # assistant-core
